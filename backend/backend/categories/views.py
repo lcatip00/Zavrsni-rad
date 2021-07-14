@@ -138,12 +138,12 @@ class FollowCategory(CreateAPIView):
             return Response(content, status=status.HTTP_201_CREATED)
 
 
-# class Follow(CreateAPIView):
-#     permission_classes = [IsAuthenticated]
-#     authentication_classes = [TokenAuthentication]
-#     serializer_class = CategoryFollow
-#
-#     def get_queryset(self):
-#         print("sta imam: ", self.request)
+class Follow(CreateAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    serializer_class = CategoryFollow
+
+    def get_queryset(self):
+        print("sta imam: ", self.request)
 
 
