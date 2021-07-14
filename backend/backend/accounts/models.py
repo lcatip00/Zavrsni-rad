@@ -18,7 +18,7 @@ class Account(AbstractUser):
     description = models.CharField(max_length=1000, null=True, blank=True)
     profile_image = models.ImageField(upload_to=upload_location, null=True, blank=True, height_field="height",
                                       width_field="width",
-                                      default="C:/Users/Lea/Desktop/Zavrsni/backend/backend/media/default_profile_picture/default.png")
+                                      default="../media/default_profile_picture/default.png")
     height = models.IntegerField(default=0)
     width = models.IntegerField(default=0)
     slug = models.SlugField(unique=True, blank=True)
