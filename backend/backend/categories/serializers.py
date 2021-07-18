@@ -9,22 +9,6 @@ from rest_framework.serializers import (
 )
 
 
-class CategoryCreateSerializer(ModelSerializer):
-    class Meta:
-        model = Category
-        fields = [
-            'name',
-            'author',
-        ]
-
-    # check if name already exists (must be uniqe)
-    def validate_name(self, name):
-        unique = Category.objects.filter(name=name).exists()
-        if unique == True:
-            raise ValidationError("Category already exists")
-        return name
-
-
 class CategoryDetailsSerializer(ModelSerializer):
 
     posts = SerializerMethodField()

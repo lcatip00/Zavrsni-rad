@@ -1,6 +1,5 @@
 from .models import Category
 from .serializers import (
-    CategoryCreateSerializer,
     CategoryDetailsSerializer,
     CategoryFollow,
     CategoryList,
@@ -12,7 +11,6 @@ from rest_framework.generics import (
     CreateAPIView,
     ListAPIView,
     RetrieveAPIView,
-    RetrieveUpdateDestroyAPIView,
 )
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
