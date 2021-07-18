@@ -22,12 +22,3 @@ class CommentSerializer(ModelSerializer):
             'username',
             'authorId',
         ]
-
-class CommentSerializerUpdate(ModelSerializer):
-
-    class Meta:
-        model = Comment
-        fields = [
-            'content',
-            'publish',
-        ]
