@@ -119,42 +119,6 @@ class PostUpdateAPIView(RetrieveUpdateDestroyAPIView):
             return Response(content, status=status.HTTP_401_UNAUTHORIZED)
 
 
-class GetDeleteUpdatePost(RetrieveUpdateDestroyAPIView):
-    serializer_class = PostSerializer
-    permission_classes = [IsAuthenticated]
-    authentication_classes = [TokenAuthentication]
-    lookup_field = 'slug'
-    queryset = Post.objects.filter
-
-    def get_queryset(self):
-        slug = self.kwargs['slug']
-        post = Post.objects.filter(slug=slug)
-        return post
-
-    # Get a post
-    def get(self, request, slug):
-
-        post = Post.objects.filter(slug=slug)
-        serializer = PostSerializer(post)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    # Update a post
-    def put(self, request, slug):
-        post = self.get_queryset(slug)
-
-        if (request.user == post.account):  # If creator is who makes request
-            serializer = PostSerializer(post, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data, status=status.HTTP_201_CREATED)
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        else:
-            content = {
-                'status': 'UNAUTHORIZED'
-            }
-            return Response(content, status=status.HTTP_401_UNAUTHORIZED)
-
-
 class MyFollowedPostsApiView(ListAPIView):
     serializer_class = PostListSerializer
     permission_classes = [IsAuthenticated]
