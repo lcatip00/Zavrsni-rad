@@ -35,53 +35,6 @@ class ComentCreateView(CreateAPIView):
         return Response({'message': 'ok'}, status=status.HTTP_200_OK)
 
 
-class CommentUpdateDeleteAPIView(RetrieveUpdateDestroyAPIView):
-    queryset = Comment.objects.all()
-    serializer_class = CommentCreateSerializer
-    lookup_field = 'id'
-
-    def get_queryset(self, id):
-        try:
-            comment = Comment.objects.get(id=id)
-        except Comment.DoesNotExist:
-            content = {
-                'status': 'Not Found'
-            }
-            raise Http404
-        return comment
-
-    def get(self, request, id):
-        comment = self.get_queryset(id)
-        serializer = CommentSerializer(comment)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
-    def patch(self, request, id):
-        comment = self.get_queryset(id)
-
-        if (request.user == comment.account):  # If creator is who makes request
-            serializer = CommentSerializerUpdate(comment, data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-    def delete(self, request,id):
-        comment = self.get_queryset(id)
-        comment.delete()
-
-        if (request.user == comment.account):  # If creator is who makes request
-            comment.delete()
-            content = {
-                'status': 'NO CONTENT'
-            }
-            return Response(content, status=status.HTTP_204_NO_CONTENT)
-        else:
-            content = {
-                'status': 'UNAUTHORIZED'
-            }
-            return Response(content, status=status.HTTP_401_UNAUTHORIZED)
-
-
 class CommentView(ListAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentCreateSerializer
