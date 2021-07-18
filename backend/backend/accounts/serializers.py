@@ -112,15 +112,6 @@ class AccountLIstSerializer(ModelSerializer):
         ]
 
 
-class GetAccountSerializer(ModelSerializer):
-    class Meta:
-        model = Account
-        fields = [
-            'id',
-            'username',
-        ]
-
-
 class ProfileImageSerializer(ModelSerializer):
     class Meta:
         model = Account
