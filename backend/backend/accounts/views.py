@@ -2,12 +2,9 @@ from .models import Account
 from .serializers import (
     AccountCreateSerializer,
     AccountDetailSerializer,
-    AccountLIstSerializer,
-    GetAccountSerializer,
     ProfileImageSerializer,
 )
 from django.contrib.auth import get_user_model
-from rest_framework import filters
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.authtoken.models import Token
@@ -18,7 +15,7 @@ from rest_framework.generics import (
     RetrieveAPIView,
     UpdateAPIView,
 )
-from rest_framework.permissions import IsAuthenticated, IsAuthenticatedOrReadOnly
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 User = get_user_model()
@@ -75,20 +72,6 @@ class AccountUpdateAPIView(RetrieveUpdateDestroyAPIView):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-
-class AccountListAPIView(ListAPIView):
-    queryset =Account.objects.all()
-    serializer_class = AccountLIstSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['username', 'first_name', 'last_name']
-
-
-class GetAccountAPIView(ListAPIView):
-    serializer_class = GetAccountSerializer
-
-    def get_queryset(self):
-        queryset = Account.objects.filter(id=self.kwargs['id'])
-        return queryset
 
 class MyAccountDetailsView(ListAPIView):
     serializer_class = AccountDetailSerializer
