@@ -26,15 +26,6 @@ class AccountCreateAPIView(CreateAPIView):
     queryset = Account.objects.all()
     serializer_class = AccountCreateSerializer
 
-    def create(self, request, *args, **kwargs):
-        serializer = self.get_serializer(data=request.data)
-        serializer.is_valid(raise_exception=True)
-        self.perform_create(serializer)
-        headers = self.get_success_headers(serializer.data)
-        account = Account.objects.get(username=request.data['username'])
-        token = Token.objects.get(user=account)
-        return Response({'token': token.key}, status=status.HTTP_201_CREATED, headers=headers)
-
 
 class AccountDetailAPIView(RetrieveAPIView):
     queryset = Account.objects.all()
