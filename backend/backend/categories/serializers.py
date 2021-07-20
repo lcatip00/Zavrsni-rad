@@ -42,17 +42,11 @@ class CategoryFollow(ModelSerializer):
 
 
 class CategoryList(ModelSerializer):
-    url = HyperlinkedIdentityField(
-        view_name='categories:details',
-        lookup_field='slug'
-    )
 
     class Meta:
         model = Category
         fields = [
             'id',
-            'url',
-            'author',
             'name',
             'slug',
         ]
