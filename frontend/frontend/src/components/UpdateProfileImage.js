@@ -41,39 +41,79 @@ const UpdateProfileImage = (props) => {
     }
 
     return(
-        <section className="modal-main">
-            <div className="modal-body"  tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-toggle="modal" >
+       
+
+    <div className="modal-body"  tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-toggle="modal">
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">Change Profile Image</h5>
+                            <h5 className="modal-title" >title</h5>
                         </div>
-                    <div className="modal-body">
-                        <div className="tab-pane p-4 bg-light rounded shadow-sm" id="edit">
+                
+                        <div className="modal-body">
+                            <div className="tab-pane p-4 bg-light rounded shadow-sm" id="edit">
                             <form role="form" id="postForm" onSubmit={submit}>
-                                <div className="form-group row">
-                                    <label className="col-lg-3 col-form-label form-control-label">Image</label>
-                                    <div className="col-lg-9">
-                                        <input 
+                               <div className="form-group row">
+                               <label className="col-lg-3 col-form-label form-control-label">Image</label>
+                                     <div className="col-lg-9">
+                                         <input 
                                             className="mt-10" 
                                             type="file" 
                                             placeholder="Add new image" 
-                                            onChange={handleImageChange}>
-                                        </input>
+                                           onChange={handleImageChange}>
+                                       </input>
                                     </div>
-                                </div>
-                            </form>
+                               </div>
+                             </form> 
+                                
+                            </div>
                         </div>
-                    </div>
-                    <div className="modal-footer">
-                        <button className="btn btn-secondary mt-3" type="submit" form="postForm"  >Submit</button>
-                        <button  className="btn btn-secondary mt-3" onClick={handleClose}>Discard</button>
+                        {/* buttons for submit and discard */}
+                        <div className="modal-footer">
+                         <button className="btn btn-secondary mt-3" type="submit" form="postForm"  >Submit</button>
+                         <button  className="btn btn-secondary mt-3" onClick={handleClose}>Discard</button>
+                     </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+    
     )
 }
 
 export default UpdateProfileImage;
+
+
+// -----------dio za prikaz profile image, radi
+
+    //     <section className="modal-main">
+    //         <div className="modal-body"  tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-toggle="modal" >
+    //             <div className="modal-dialog" role="document">
+    //                 <div className="modal-content">
+    //                     <div className="modal-header">
+    //                         <h5 className="modal-title">Change Profile Image</h5>
+    //                     </div>
+    //                 <div className="modal-body">
+    //                     <div className="tab-pane p-4 bg-light rounded shadow-sm" id="edit">
+    //                         <form role="form" id="postForm" onSubmit={submit}>
+    //                             <div className="form-group row">
+    //                                 <label className="col-lg-3 col-form-label form-control-label">Image</label>
+    //                                 <div className="col-lg-9">
+    //                                     <input 
+    //                                         className="mt-10" 
+    //                                         type="file" 
+    //                                         placeholder="Add new image" 
+    //                                         onChange={handleImageChange}>
+    //                                     </input>
+    //                                 </div>
+    //                             </div>
+    //                         </form>
+    //                     </div>
+    //                 </div>
+    //                 <div className="modal-footer">
+    //                     <button className="btn btn-secondary mt-3" type="submit" form="postForm"  >Submit</button>
+    //                     <button  className="btn btn-secondary mt-3" onClick={handleClose}>Discard</button>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //     </div>
+    // </section>
