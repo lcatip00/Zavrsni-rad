@@ -43,7 +43,7 @@ const MyProfile = () => {
     }
 
     const handleChangeProfileImage = () =>{
-        setChangeProfileImageModal(true)
+        setChangeProfileImageModal(!changeProfileImageModal)
     }
 
     return(
@@ -65,7 +65,10 @@ const MyProfile = () => {
                                         Change Profile Image
                                     </button>
                                 </div>
-                                <div>
+                                
+                            </div>
+                        </div>
+                        <div>
                                     {/* button for image change */}
                                     {
                                         changeProfileImageModal == true &&
@@ -75,9 +78,6 @@ const MyProfile = () => {
                                             changeProfileImageModal={changeProfileImageModal}
                                         ></UpdateProfileImage>}
                                 </div>
-                            </div>
-                        </div>
-
                         <div className="py-4 px-4">
                             <div className="py-4">
                                 {/* navbar */}
