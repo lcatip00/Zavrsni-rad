@@ -5,6 +5,7 @@ from .serializers import (
     CategoryList,
     MyCategoreisListSerializer
 )
+from django.http import JsonResponse
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import (
@@ -28,7 +29,6 @@ class CategoryList(ListAPIView):
 
 
 class MyCategoriesListApiView(ListAPIView):
-    # queryset = Category.objects.all()
     serializer_class = MyCategoreisListSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
@@ -73,3 +73,25 @@ class FollowCategory(CreateAPIView):
                 'status': 'Follow'
             }
             return Response(content, status=status.HTTP_201_CREATED)
+
+
+class IsFollower(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+    lookup_field = 'slug'
+
+    def get_queryset(self, slug):
+        category = Category.objects.get(slug=slug)
+        return category
+
+    # if user is follower return true else return false
+    def get(self, request, *args, **kwargs):
+        slug = self.kwargs.get('slug')
+        category = self.get_queryset(slug)
+
+        if request.user in category.followers.all():
+            content = {'follower': 'true'}
+            return Response(content, status=status.HTTP_200_OK)
+        else:
+            content = {'follower': 'false'}
+            return Response(content, status=status.HTTP_200_OK)

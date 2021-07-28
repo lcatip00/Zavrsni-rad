@@ -2,10 +2,8 @@ from .models import Category
 from posts.models import Post
 from posts.serializers import PostListSerializer
 from rest_framework.serializers import (
-    HyperlinkedIdentityField,
     ModelSerializer,
     SerializerMethodField,
-    ValidationError,
 )
 
 
@@ -29,7 +27,6 @@ class CategoryDetailsSerializer(ModelSerializer):
         post_list = Post.objects.filter(category=obj.id)
         post = PostListSerializer(post_list, context={"request": request}, many=True)
         return post.data
-
 
 
 class CategoryFollow(ModelSerializer):

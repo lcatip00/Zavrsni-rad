@@ -9,4 +9,5 @@ urlpatterns = [
     path('myCategories/', MyCategoriesListApiView.as_view(), name='myCategories'),
     path('<slug>/', CategoryDetails.as_view(), name='details'),
     path('follow/<slug>/', FollowCategory.as_view(), name='follow'),
+    path('isFollower/<slug>/', IsFollower.as_view(), name='isFollower'),
 ]
