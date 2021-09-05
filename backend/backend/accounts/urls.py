@@ -3,7 +3,7 @@ from .views import (
     AccountDetailAPIView,
     AccountUpdateAPIView,
     MyAccountDetailsView,
-    PatchProfileImageView
+    UpdateProfileImageView
 )
 from django.urls import include, path
 
@@ -15,6 +15,6 @@ urlpatterns = [
     path('create/', AccountCreateAPIView.as_view(), name='create'),
     path('<slug>/', AccountDetailAPIView.as_view(), name='details'),
     path('<slug>/update/', AccountUpdateAPIView.as_view(), name='update'),
-    path('changeProfileImage/<int:id>/', PatchProfileImageView.as_view(), name='changeProfileImage')
+    path('changeProfileImage/<int:id>/', UpdateProfileImageView.as_view(), name='changeProfileImage')
 
 ]

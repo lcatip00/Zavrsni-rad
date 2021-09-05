@@ -7,7 +7,6 @@ from .serializers import (
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
-from rest_framework.authtoken.models import Token
 from rest_framework.generics import (
     CreateAPIView,
     RetrieveUpdateDestroyAPIView,
@@ -55,14 +54,6 @@ class AccountUpdateAPIView(RetrieveUpdateDestroyAPIView):
             }
             return Response(content)
 
-    def patch(self, request, slug):
-        user = request.user
-        serializer = AccountDetailSerializer(user, data=request.data,partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
 
 class MyAccountDetailsView(ListAPIView):
     serializer_class = AccountDetailSerializer
@@ -73,8 +64,7 @@ class MyAccountDetailsView(ListAPIView):
         return queryset
 
 
-class PatchProfileImageView(UpdateAPIView):
-
+class UpdateProfileImageView(UpdateAPIView):
     queryset = Account.objects.all()
     serializer_class = ProfileImageSerializer
     authentication_classes = [TokenAuthentication]
