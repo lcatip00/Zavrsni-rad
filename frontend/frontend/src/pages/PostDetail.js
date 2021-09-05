@@ -23,9 +23,9 @@ const PostDetail = (props) => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
+    const fetchData = () => {
 
-        axios.get(`http://127.0.0.1:8000/posts/${slug}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${slug}`)
         .then(res=>{
             setLikeNumber(res.data.likes.length)
             setDislikeNumber(res.data.dislikes.length)
@@ -73,12 +73,13 @@ const PostDetail = (props) => {
                             Update
                         </button>
                 }
-                {
-                    showModal &&
-                    <UpdatePost slug={slug} showModal={showModal} setShowModal={setShowModal} ></UpdatePost>
-                }
+               
             </div>
             <hr></hr>
+            {
+                showModal &&
+                <UpdatePost slug={slug} showModal={showModal} setShowModal={setShowModal} ></UpdatePost>
+            }
             {/* list of comments */}
             <div className="mt-5">
                 <p className="ml-9"><b><i>Comments:</i></b></p>

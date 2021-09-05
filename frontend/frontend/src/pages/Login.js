@@ -25,7 +25,7 @@ const Login = () => {
             setFielderrorMessages({'non_field_errors': "All fields must be filled"})
         }else{
             // post request to login user if theere is no empty field
-            await axios.post('http://127.0.0.1:8000/accounts/rest-auth/login/', data)
+            await axios.post(`${process.env.REACT_APP_BASE_URL}/accounts/rest-auth/login/`, data)
             .then(res => {
                 //set token to the local storage
                 localStorage.setItem('token', res.data.key)
@@ -51,7 +51,7 @@ const Login = () => {
         if (redirect){
             const token = localStorage.getItem('token');
 
-            axios.get(`http://127.0.0.1:8000/accounts/rest-auth/user`, {headers: {
+            axios.get(`${process.env.REACT_APP_BASE_URL}/accounts/rest-auth/user`, {headers: {
                 'Authorization': `Token ${token}` 
                 }}).then(
                 res => {
@@ -98,6 +98,7 @@ const Login = () => {
                     }
                     {/* <!-- Button to log in --> */}
                     <button className="w-100 btn btn-lg btn-secondary" type="submit">Login</button>
+                    <a href="http://localhost:8000/admin/login/">Login as Admin</a>
                 </form>
             </main>
         </div>

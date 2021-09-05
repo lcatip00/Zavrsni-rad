@@ -18,7 +18,7 @@ const Profile = (props) => {
 
     const fetchData = async () => {
        
-        axios.get(`http://127.0.0.1:8000/accounts/${slug}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/accounts/${slug}`)
         .then(res=>{
             setUsername(res.data.username)
             setFirstName(res.data.first_name)

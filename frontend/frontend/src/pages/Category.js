@@ -7,7 +7,6 @@ import {useParams} from 'react-router-dom'
 
 const Category = (props) => {
  
-    const [authorId, setAuthorId] = useState(0);
     const [categoryId, setCategoryId] = useState(0);
     const currentUser = localStorage.getItem('user');
     const [numberOfFollowers, setNumberOfFollowers] = useState(0);
@@ -18,14 +17,13 @@ const Category = (props) => {
 
     useEffect(() => {
         fetchData();
-    }, []);
+    }, [postList]);
 
     const fetchData =  () => {
-        axios.get(`http://127.0.0.1:8000/categories/${slug}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/categories/${slug}`)
         .then(res=>{
             setTitle(res.data.name)
             setNumberOfFollowers(res.data.followers.length)         
-            setAuthorId(res.data.author)
             setPostList(res.data.posts)
             setCategoryId(res.data.id)
         }  )

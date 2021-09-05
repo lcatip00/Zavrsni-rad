@@ -3,7 +3,7 @@ import React from 'react'
 const Pagination =  (props) => {
 
     // izracunaj broj stranica i spremi ih uniz
-    const maxPageNumbers = Math.floor((props.nuberOfPosts - 1) /20)+1;
+    const maxPageNumbers = Math.floor((props.nuberOfPosts - 1) /15)+1;
     const pageNumbers = [];
 
     for (let i =1; i<= maxPageNumbers; i++){
@@ -45,8 +45,8 @@ const Pagination =  (props) => {
         //na osnovu toga koji se broj klikne mjenja se nastavak za url
         //formula je br page -1 pomnozeno s 20, jer onda dobijamo po tome linkove 
         //trebam dohvatiti koji je broj kliknut i nekako na osnovu toga na base url
-        const count = ((parseInt(e.target.id)-1) * 20)
-        const urlExstension = "?limit=20&offset="+ count
+        const count = ((parseInt(e.target.id)-1) * 15)
+        const urlExstension = "?limit=15&offset="+ count
         const najnoviji = props.baseUrl.concat(urlExstension)
         props.setUrl(najnoviji)
         //postaviti na dodatak, sve spremiti u pravi url

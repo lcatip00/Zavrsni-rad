@@ -11,10 +11,9 @@ const CategoryList = () => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
-        axios.get(`http://127.0.0.1:8000/categories/list/`)
+    const fetchData = () => {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/categories/list/`)
         .then(res=>{
-            console.log(res.data.results)
             setCategoryList(res.data)
         }  )
         .catch(err=> console.log(err))

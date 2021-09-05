@@ -26,7 +26,7 @@ const MyProfile = () => {
     const fetchData = () => {
         const token = localStorage.getItem('token');
 
-        axios.get(`http://127.0.0.1:8000/accounts/myprofile`,
+        axios.get(`${process.env.REACT_APP_BASE_URL}/accounts/myprofile`,
         {headers: {
           'Authorization': `Token ${token}`
         }})

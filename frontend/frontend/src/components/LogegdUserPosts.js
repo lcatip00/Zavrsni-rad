@@ -2,7 +2,6 @@ import axios from 'axios'
 import PostList from './PostList'
 import React, {useEffect, useState} from 'react'
 import MyCategories from './MyCategories'
-import { Container } from 'react-bootstrap';
 import Pagination from './Pagination';
 
 const LoggedUserPosts = () => {
@@ -13,8 +12,8 @@ const LoggedUserPosts = () => {
         if (url == ""){
             //set url depending on user authentication
             console.log("url je nista")
-            localStorage.getItem('token')? setUrl("http://127.0.0.1:8000/posts/followedPosts"):
-            setUrl("http://127.0.0.1:8000/posts/")
+            localStorage.getItem('token')? setUrl(`${process.env.REACT_APP_BASE_URL}/posts/followedPosts`):
+            setUrl(`${process.env.REACT_APP_BASE_URL}/posts/`)
         }
         //display data depending on user authentication
         localStorage.getItem('token')? loggedUserData() : unLoggedUserData()
@@ -34,9 +33,6 @@ const LoggedUserPosts = () => {
             setPostNumber(res.data.count)
             setPrevUrl(res.data.previous)
             setNextUrl(res.data.next)
-            console.log("prev je: ",res.data.previous)
-            console.log("next je: ", res.data.next)
-            // putPageNumbers()
         }).catch(err => console.log(err))
     }
 

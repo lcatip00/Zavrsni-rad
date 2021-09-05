@@ -20,7 +20,7 @@ const Search = (props) =>{
 
     const fetchData = async () => {
 
-        axios.get(`http://127.0.0.1:8000/search/${query}/`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/search/${query}/`)
         .then(res=>{
             setProfiles(res.data.accounts)
             setCategories(res.data.categories)

@@ -17,7 +17,7 @@ const FollowCategory = (props) => {
            alert("Please log in")
         }
         else{
-            axios.post(`http://127.0.0.1:8000/categories/follow/${props.slug}/`, data, {headers: {
+            axios.post(`${process.env.REACT_APP_BASE_URL}/categories/follow/${props.slug}/`, data, {headers: {
                 'Authorization': `Token ${token}`}
             }).then(res =>{ 
                 window.location.reload(true);
@@ -28,11 +28,10 @@ const FollowCategory = (props) => {
 
     const checkIsFollower = () => {
         const token = localStorage.getItem('token');
-        axios.get(`http://127.0.0.1:8000/categories/isFollower/${props.slug}/`, {headers: {
+        axios.get(`${process.env.REACT_APP_BASE_URL}/categories/isFollower/${props.slug}/`, {headers: {
             'Authorization': `Token ${token}`}
         }).then(res =>{
             setIsFollower(res.data.follower)
-            console.log("res za foll: ", res.data.follower)
         }).catch(err => {console.log("eror je: ",err)})
     }
 

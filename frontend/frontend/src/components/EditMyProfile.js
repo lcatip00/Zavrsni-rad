@@ -16,7 +16,7 @@ const EditMyProfile  = (props) => {
     const fetchData =  () => {
         const token = localStorage.getItem('token');
 
-        axios.patch(`http://127.0.0.1:8000/accounts/${props.slug}/update/`, data,
+        axios.patch(`${process.env.REACT_APP_BASE_URL}/accounts/${props.slug}/update/`, data,
         {headers: {
           'Authorization': `Token ${token}`
         }})
@@ -29,11 +29,11 @@ const EditMyProfile  = (props) => {
         .catch(err=> console.log(err))
     }
 
-    const update =   (event) => {
+    const update = (event) => {
         event.preventDefault()
         const token = localStorage.getItem('token');
   
-        axios.patch(`http://127.0.0.1:8000/accounts/${props.slug}/update/`, data,
+        axios.patch(`${process.env.REACT_APP_BASE_URL}/accounts/${props.slug}/update/`, data,
         {headers: {
           'Authorization': `Token ${token}`
         }})

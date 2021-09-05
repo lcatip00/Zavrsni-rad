@@ -9,9 +9,9 @@ const MyCategories = () => {
         fetchData();
     }, []);
 
-    const fetchData = async () => {
+    const fetchData =  () => {
         const token = localStorage.getItem('token');
-        axios.get(`http://127.0.0.1:8000/categories/myCategories`,
+        axios.get(`${process.env.REACT_APP_BASE_URL}/categories/myCategories`,
         {headers: {
             'Authorization': `Token ${token}`
           }})

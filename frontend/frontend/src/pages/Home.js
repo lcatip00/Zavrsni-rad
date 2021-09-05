@@ -16,27 +16,28 @@ const Home = () => {
 
     useEffect(() => {
         fetchData();
-    }, [url]);
+    }, [nuberOfPosts, url]);// wait for number of posts and url
 
-    const fetchData = () =>{
+    const fetchData =  () =>{
         // if baseUrl is empty and user is logged 
         // then set url http://127.0.0.1:8000/posts/followedPosts
         if(localStorage.getItem('token') && baseUrl == ""){
-            setBaseUrl("http://127.0.0.1:8000/posts/followedPosts")
-            setUrl("http://127.0.0.1:8000/posts/followedPosts")
+            setBaseUrl(`${process.env.REACT_APP_BASE_URL}/posts/followedPosts`)
+            setUrl(`${process.env.REACT_APP_BASE_URL}/posts/followedPosts`)
         }
         // if user is not logged and there is no token 
-        // set this url
+        // set url http://127.0.0.1:8000/posts/
         if(!localStorage.getItem('token') && baseUrl == ""){
-            setBaseUrl("http://127.0.0.1:8000/posts/")
-            setUrl("http://127.0.0.1:8000/posts/")
+            setBaseUrl(`${process.env.REACT_APP_BASE_URL}/posts/`)
+            setUrl(`${process.env.REACT_APP_BASE_URL}/posts/`)
         }
 
         // get user data
         if(localStorage.getItem('token')){
+            console.log("Url u home: ", url)
             const token = localStorage.getItem('token')
 
-            axios.get(url,{headers: {
+             axios.get(url,{headers: {
                 'Authorization': `Token ${token}`
                 }
             }).then(res => {
@@ -49,8 +50,8 @@ const Home = () => {
             })
         }
         else{
-
-            axios.get(url)
+            console.log("Url u home: ", url)
+             axios.get(url)
             .then(res => {
                 setAllPosts(res.data.results)
                 setPrevUrl(res.data.previous)

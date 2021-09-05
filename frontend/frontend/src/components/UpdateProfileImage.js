@@ -24,10 +24,9 @@ const UpdateProfileImage = (props) => {
 
         if (image.image){
             data.append("profile_image", image.image)
-            axios.put(`http://127.0.0.1:8000/accounts/changeProfileImage/${id}/`, data,{headers: {
+            axios.put(`${process.env.REACT_APP_BASE_URL}/accounts/changeProfileImage/${id}/`, data,{headers: {
                 'Authorization': `Token ${token}`
             }}).then(res =>{
-                console.log(res.data)
                 props.setChangeProfileImageModal(false)
                 window.location.reload(true);
             }).catch(err => {

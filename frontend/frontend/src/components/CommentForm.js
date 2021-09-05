@@ -17,7 +17,7 @@ const CommentForm = (props) => {
         }
         const token = localStorage.getItem('token');
 
-        axios.post("http://127.0.0.1:8000/comments/create/", data, {headers: {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/comments/create/`, data, {headers: {
             'Authorization': `Token ${token}` 
           }}).then(res => {
                 window.location.reload(true);

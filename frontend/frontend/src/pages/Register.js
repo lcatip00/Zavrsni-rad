@@ -32,7 +32,7 @@ const Register = () => {
         if(username == "" || email == "" || password == "" || confirmPassword == ""){
             setFielderrorMessages({"messages": ["Please fill all fields with *"]})
         }else{
-            axios.post('http://127.0.0.1:8000/accounts/create/', data)
+            axios.post(`${process.env.REACT_APP_BASE_URL}/accounts/create/`, data)
             .then(res => {
                     setRedirect(true);
                     window.location.reload(true);

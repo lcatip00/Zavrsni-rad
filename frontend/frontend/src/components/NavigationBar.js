@@ -18,7 +18,7 @@ const Styles = styled.div`{
 }`;
 
 const handleLogoutClick = () => {
-    axios.post(`http://127.0.0.1:8000/accounts/rest-auth/logout/`)
+    axios.post(`${process.env.REACT_APP_BASE_URL}/accounts/rest-auth/logout/`)
     .then(res => {console.log(res)})
     .catch(err => {console.log(err)})
     localStorage.removeItem('token')

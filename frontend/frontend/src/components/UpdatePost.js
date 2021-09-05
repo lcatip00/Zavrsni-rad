@@ -8,13 +8,13 @@ const UpdatePost = (props) => {
     const [image, setImage] = useState("null");
     const [title, setTitle] = useState("");
     let dataAxios = new FormData();
-    
+
     useEffect(() => {
         fetchData();
     }, []);
 
     const fetchData = async () => {
-        axios.get(`http://127.0.0.1:8000/posts/${props.slug}`)
+        axios.get(`${process.env.REACT_APP_BASE_URL}/posts/${props.slug}`)
         .then(res=>{
             setTitle(res.data.title);
             setDescription(res.data.content);
@@ -26,44 +26,18 @@ const UpdatePost = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault()
         const token = localStorage.getItem('token');
-        // let dataAxios = new FormData();
-        console.log("srenje: ", dataAxios)
-        console.log("Data u endsgi: ", data)
-        console.log("prije tit", title)
-        console.log("s des", description)
-        // console.log("s img", image.image)
 
         if ('title' in data){
-            console.log("UPd tit", title)
             dataAxios.append("title",title)
         }
         if ('description' in data){
-            console.log("UPd des", description)
-            dataAxios.append("content",description)     
+            dataAxios.append("content",description)
         }
         if ('image' in data){
-            console.log("UPd img", image.image)
             dataAxios.append("image", image.image)
         }
-        // console.log("data: ", dataAxios.values())
-        for (var value of dataAxios.values()) {
-            console.log("val",value);
-         }
-        // if(title != ""){
-        //     console.log("UPd tit", title)
-        //     dataAxios.append("title",title)
-        // }
-        // if(description != ""){
-        //     console.log("UPd des", description)
-        //     dataAxios.append("description",description)
-        // }
-        // if (image.image != undefined){
-        //     console.log("UPd img", image.image)
-        //     dataAxios.append("image", image.image)
-        // // }
-        // console.log("data: ", dataAxios   )
 
-        axios.patch(`http://127.0.0.1:8000/posts/${props.slug}/update/`, dataAxios, {headers: {
+        axios.patch(`${process.env.REACT_APP_BASE_URL}/posts/${props.slug}/update/`, dataAxios, {headers: {
             'Authorization': `Token ${token}`
           }})
         .then(res => {
@@ -109,7 +83,7 @@ const UpdatePost = (props) => {
     }
 
     return(
-        <section className="modal-main">
+        <section >
             <div className="modal-body"  tabIndex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" data-toggle="modal" >
                 <div className="modal-dialog" role="document">
                     <div className="modal-content">
@@ -123,7 +97,7 @@ const UpdatePost = (props) => {
                                         <label className="col-lg-3 col-form-label form-control-label">Post Title</label>
                                         <div className="col-lg-9">
                                         <input
-                                            type="text" 
+                                            type="text"
                                             placeholder="Title"
                                             name="title"
                                             value={title}
@@ -134,15 +108,15 @@ const UpdatePost = (props) => {
                                     <div className="form-group row">
                                         <label className="col-lg-3 col-form-label form-control-label">Description</label>
                                         <div className="col-lg-9">
-                                        <input
+                                        <textarea
                                                 // className="form-control mt-10"
-                                                // rows="3" 
-                                                type="textarea" 
+                                                // rows="3"
+                                                type="textarea"
                                                 placeholder="Add Post description ..."
                                                 name="description"
                                                 value={description}
                                                 onChange={handleChange}>
-                                        </input>
+                                        </textarea>
                                         </div>
                                     </div>
                                     <div className="form-group row">

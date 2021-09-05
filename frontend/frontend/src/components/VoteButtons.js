@@ -8,7 +8,7 @@ const VoteButtons = (props) => {
     const handleLikeButton = () => {
         const token = localStorage.getItem('token');
 
-        axios.post(`http://127.0.0.1:8000/votes/like/`,
+        axios.post(`${process.env.REACT_APP_BASE_URL}/votes/like/`,
             {
                 "vote": true,
                 "post": props.postId,
@@ -29,7 +29,7 @@ const VoteButtons = (props) => {
     const handleDislike = () => {
         const token = localStorage.getItem('token');
        
-        axios.post(`http://127.0.0.1:8000/votes/dislike/`,
+        axios.post(`${process.env.REACT_APP_BASE_URL}/votes/dislike/`,
             {
                 "vote": false,
                 "post": props.postId,

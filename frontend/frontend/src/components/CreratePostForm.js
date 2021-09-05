@@ -19,7 +19,7 @@ const CreatePostForm = ({actionTitle, acton, categoryId, showCreatePostForm, set
         data.append("title", title)
 
         // image field is optional
-        // so it is necessary to check if image exists
+        // it is necessary to check if image exists
          if (image.image){
             data.append("image", image.image)
          }
@@ -27,7 +27,7 @@ const CreatePostForm = ({actionTitle, acton, categoryId, showCreatePostForm, set
         data.append("content", content)
         data.append("category", categoryId)
 
-        axios.post("http://127.0.0.1:8000/posts/create/", data, {headers: {
+        axios.post(`${process.env.REACT_APP_BASE_URL}/posts/create/`, data, {headers: {
             'Authorization': `Token ${token}`
           }})
             .then(res => {
