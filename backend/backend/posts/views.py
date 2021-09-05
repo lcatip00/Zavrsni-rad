@@ -8,7 +8,6 @@ from .serializers import (
 )
 from categories.models import Category
 from django.http import Http404
-from rest_framework import filters
 from rest_framework import status
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.generics import (
@@ -54,8 +53,6 @@ class PostCreateAPIView(CreateAPIView):
 class PostListAPIView(ListAPIView):
     queryset = Post.objects.all()
     serializer_class = PostListSerializer
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['title', 'content', 'account__first_name']
 
 
 class PostDetailsAPIVIew(RetrieveAPIView):
@@ -123,7 +120,6 @@ class MyFollowedPostsApiView(ListAPIView):
     serializer_class = PostListSerializer
     permission_classes = [IsAuthenticated]
     authentication_classes = [TokenAuthentication]
-    # lookup_field = 'slug'
 
     def get_queryset(self):
         queryset = Post.objects.none()

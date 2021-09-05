@@ -16,9 +16,7 @@ class CategoryDetailsSerializer(ModelSerializer):
         fields = [
             'id',
             'name',
-            'author',
             'followers',
-            'post_category',
             'posts',
         ]
 

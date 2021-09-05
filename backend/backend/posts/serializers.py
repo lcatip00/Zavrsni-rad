@@ -2,7 +2,6 @@ from .models import Post
 from comments.models import Comment
 from comments.serializers import CommentSerializer
 from django.contrib.auth import get_user_model
-from rest_framework import serializers
 from rest_framework.serializers import (
     CharField,
     IntegerField,
@@ -49,8 +48,8 @@ class PostDetailsSerializer(ModelSerializer):
     username = CharField(source='account.username')
     userId = IntegerField(source='account.id')
     comments = SerializerMethodField()
-    likes = serializers.SerializerMethodField('get_likes')
-    dislikes = serializers.SerializerMethodField('get_dislikes')
+    likes = SerializerMethodField('get_likes')
+    dislikes = SerializerMethodField('get_dislikes')
 
     class Meta:
         model = Post
