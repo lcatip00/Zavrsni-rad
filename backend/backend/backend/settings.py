@@ -20,7 +20,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# SE
+#
+#
+# : keep the secret key used in production secret!
 SECRET_KEY = '*hrpai=c^-4p1%g*g(4!#0ux&qmws&d1g#+h-(+5n8_x1loctz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -61,10 +64,9 @@ REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.AllowAny',
     ],
-
     #number of items per page
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 20
+    'PAGE_SIZE': 15
 }
 
 MIDDLEWARE = [
